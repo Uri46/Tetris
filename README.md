@@ -8,7 +8,8 @@ Juego Tetris hecho con Python y Pygame CE, organizado con programación orientad
 
 > Espacios reservados para capturas del proyecto.
 
-![Menú principal](docs/screenshots/menu.png)
+![Menú principal](<img width="943" height="739" alt="menu_tetris" src="https://github.com/user-attachments/assets/333add84-595e-46de-8be9-68168109effa" />
+)
 ![Partida en curso](docs/screenshots/gameplay.png)
 ![Game Over](docs/screenshots/game-over.png)
 
