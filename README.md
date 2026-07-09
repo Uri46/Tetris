@@ -52,7 +52,14 @@ Tetris/
 ## Instalación
 
 1. Clonar el repositorio o descargar el proyecto.
-2. Crear y activar un entorno virtual:
+2. Entrar a la carpeta del proyecto. Este paso es importante: `main.py` está dentro de `Tetris`, no en la carpeta de usuario.
+
+```bash
+git clone https://github.com/Uri46/Tetris.git
+cd Tetris
+```
+
+3. Crear y activar un entorno virtual:
 
 ```bash
 python -m venv .venv
@@ -70,7 +77,7 @@ En macOS/Linux:
 source .venv/bin/activate
 ```
 
-3. Instalar dependencias:
+4. Instalar dependencias:
 
 ```bash
 pip install -r requirements.txt
@@ -80,9 +87,21 @@ pip install -r requirements.txt
 
 ## Cómo ejecutar
 
-Desde la raíz del proyecto:
+Desde la raíz del proyecto, es decir, estando dentro de la carpeta `Tetris`:
 
 ```bash
+python main.py
+```
+
+En Windows PowerShell, el flujo completo sería:
+
+```powershell
+cd C:\Users\uriel
+git clone https://github.com/Uri46/Tetris.git
+cd Tetris
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
 python main.py
 ```
 
