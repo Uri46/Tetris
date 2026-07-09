@@ -1,0 +1,85 @@
+"""Central configuration for the Tetris project."""
+
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+ASSETS_DIR = BASE_DIR / "assets"
+FONTS_DIR = ASSETS_DIR / "fonts"
+MUSIC_DIR = ASSETS_DIR / "music"
+SOUNDS_DIR = ASSETS_DIR / "sounds"
+IMAGES_DIR = ASSETS_DIR / "images"
+SCORE_FILE = BASE_DIR / "high_score.json"
+
+WINDOW_TITLE = "Tetris Profesional"
+WINDOW_WIDTH = 960
+WINDOW_HEIGHT = 720
+FPS = 60
+SHOW_FPS = False
+
+GRID_WIDTH = 10
+GRID_HEIGHT = 20
+CELL_SIZE = 30
+BOARD_WIDTH = GRID_WIDTH * CELL_SIZE
+BOARD_HEIGHT = GRID_HEIGHT * CELL_SIZE
+BOARD_X = 320
+BOARD_Y = 60
+SIDE_PANEL_X = 650
+SIDE_PANEL_Y = 60
+SIDE_PANEL_WIDTH = 250
+SIDE_PANEL_HEIGHT = 600
+
+SPAWN_X = GRID_WIDTH // 2 - 2
+SPAWN_Y = -2
+
+BASE_FALL_INTERVAL_MS = 820
+FALL_INTERVAL_STEP_MS = 65
+MIN_FALL_INTERVAL_MS = 85
+LOCK_DELAY_MS = 450
+MAX_LOCK_RESETS = 15
+LINE_CLEAR_DURATION_MS = 320
+LANDING_FLASH_MS = 220
+LINES_PER_LEVEL = 10
+
+MOVE_REPEAT_DELAY_MS = 145
+MOVE_REPEAT_INTERVAL_MS = 45
+
+BACKGROUND_MUSIC = MUSIC_DIR / "theme.ogg"
+ICON_PATH = IMAGES_DIR / "icon.png"
+SOUND_FILES = {
+    "move": SOUNDS_DIR / "move.wav",
+    "rotate": SOUNDS_DIR / "rotate.wav",
+    "drop": SOUNDS_DIR / "drop.wav",
+    "clear": SOUNDS_DIR / "clear.wav",
+    "hold": SOUNDS_DIR / "hold.wav",
+    "game_over": SOUNDS_DIR / "game_over.wav",
+    "menu": SOUNDS_DIR / "menu.wav",
+}
+
+COLOR_BACKGROUND = (11, 13, 20)
+COLOR_BACKGROUND_GRID = (18, 22, 34)
+COLOR_SURFACE = (23, 28, 41)
+COLOR_SURFACE_DARK = (16, 20, 31)
+COLOR_SURFACE_LIGHT = (35, 42, 58)
+COLOR_BORDER = (71, 85, 105)
+COLOR_TEXT = (232, 238, 247)
+COLOR_TEXT_MUTED = (147, 159, 178)
+COLOR_ACCENT = (20, 184, 166)
+COLOR_ACCENT_DARK = (13, 148, 136)
+COLOR_WARNING = (251, 191, 36)
+COLOR_DANGER = (248, 113, 113)
+COLOR_GHOST = (148, 163, 184)
+COLOR_SHADOW = (3, 7, 18)
+
+PIECE_COLORS = {
+    "I": (34, 211, 238),
+    "O": (250, 204, 21),
+    "T": (192, 132, 252),
+    "S": (74, 222, 128),
+    "Z": (248, 113, 113),
+    "J": (96, 165, 250),
+    "L": (251, 146, 60),
+}
+
+TETROMINO_ORDER = ("I", "O", "T", "S", "Z", "J", "L")
+
