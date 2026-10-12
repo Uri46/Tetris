@@ -1,106 +1,72 @@
-# Tetris Profesional en Python
+# Tetris en Python con Pygame
 
-## Descripción
+Recreación del clásico juego **Tetris** desarrollada en **Python 3** con **Pygame (`pygame-ce`)**, estructurada con programación orientada a objetos.
 
-Juego Tetris hecho con Python y Pygame CE, organizado con programación orientada a objetos y una estructura lista para subir a GitHub. Incluye menú principal, pausa, reinicio, pantalla de Game Over, sistema de puntaje, niveles, líneas eliminadas, hold, vista previa, sonidos, música de fondo reemplazable y récord persistente en JSON.
+Incluye menú principal, pausa, pantalla de fin de partida, sistema de niveles y puntaje, pieza fantasma (*ghost piece*), reserva de pieza (*hold*), vista previa de la siguiente pieza, efectos de sonido generados por código (reemplazables por archivos propios) y persistencia del récord en un archivo JSON.
 
 ## Capturas
 
-
-
 ![Menú principal](docs/screenshots/menu_tetris.png)
 ![Partida en curso](docs/screenshots/gameplay.png)
-![Game Over](docs/screenshots/game-over.png)
 
-## Características
+## Características reales del código
 
-- Siete tetrominós oficiales.
-- Rotación con wall kicks estilo SRS.
-- Colisiones, bloqueo, hard drop y soft drop.
-- Hold de pieza y vista previa de la siguiente pieza.
-- Eliminación de líneas con animación.
-- Efecto visual al tocar el suelo.
-- Velocidad progresiva por nivel.
-- Panel lateral con puntaje, nivel, líneas, récord, próxima pieza y hold.
-- Música y efectos reemplazables desde `assets/`.
-- Récord guardado automáticamente en `high_score.json`.
-- Contador de FPS opcional con la tecla `F`.
+- **7 tetrominós oficiales** (`I`, `O`, `T`, `S`, `Z`, `J`, `L`) definidos en `src/piece.py` mediante `@dataclass`.
+- **Rotación estilo SRS (*Super Rotation System*):** Tablas de compensación (*wall kicks*) para piezas `JLSTZ` e `I`.
+- **Mecánicas completas (`src/board.py` y `src/game.py`):** Detección de colisiones, proyección de caída (*ghost piece*), *soft drop*, *hard drop*, *hold* de pieza y velocidad progresiva por nivel.
+- **Audio con respaldo automático (`AudioManager`):** Si las carpetas de `assets/` no contienen archivos `.wav` u `.ogg`, el juego sintetiza efectos de sonido y música mediante ondas senoidales (`math.sin` y `array`).
+- **Persistencia (`src/score.py`):** Lectura y guardado automático del puntaje máximo en `high_score.json`.
 
-## Estructura
+## Tecnologías utilizadas
+
+- **Python 3** (`dataclasses`, `enum`, `json`, `math`, `array`, `random`, `pathlib`)
+- **Pygame (`pygame-ce >= 2.5.7`)**
+
+## Estructura del proyecto
 
 ```text
 Tetris/
 ├── assets/
 │   ├── fonts/
+│   ├── images/
 │   ├── music/
-│   ├── sounds/
-│   └── images/
+│   └── sounds/
+├── docs/
+│   └── screenshots/
 ├── src/
-│   ├── board.py
-│   ├── piece.py
-│   ├── game.py
-│   ├── ui.py
-│   ├── config.py
-│   └── score.py
-├── main.py
+│   ├── board.py      # Tablero 10x20, colisiones, ghost piece y limpieza de líneas
+│   ├── config.py     # Constantes de ventana, colores, tiempos y rutas
+│   ├── game.py       # Bucle principal, estados del juego y AudioManager
+│   ├── piece.py      # Tetrominós, rotaciones y wall kicks SRS
+│   ├── score.py      # Cálculo de puntaje, niveles y persistencia en JSON
+│   └── ui.py         # Renderizado del tablero, paneles laterales y menús
+├── main.py           # Punto de entrada
 ├── requirements.txt
-├── README.md
-├── LICENSE
-└── .gitignore
+└── LICENSE
 ```
 
-## Instalación
+## Instalación y ejecución
 
-1. Clonar el repositorio o descargar el proyecto.
-2. Entrar a la carpeta del proyecto. Este paso es importante: `main.py` está dentro de `Tetris`, no en la carpeta de usuario.
+1. Clonar el repositorio y entrar a la carpeta del proyecto:
 
 ```bash
 git clone https://github.com/Uri46/Tetris.git
 cd Tetris
 ```
 
-3. Crear y activar un entorno virtual:
+2. Crear y activar un entorno virtual:
 
 ```bash
 python -m venv .venv
-```
-
-En Windows:
-
-```bash
+# En Windows:
 .venv\Scripts\activate
-```
-
-En macOS/Linux:
-
-```bash
+# En Linux / macOS:
 source .venv/bin/activate
 ```
 
-4. Instalar dependencias:
+3. Instalar la dependencia y ejecutar el juego:
 
 ```bash
-pip install -r requirements.txt
-```
-
-> En Python 3.14 se usa `pygame-ce`, que mantiene el import clásico `import pygame` y evita problemas de compilación en Windows.
-
-## Cómo ejecutar
-
-Desde la raíz del proyecto, es decir, estando dentro de la carpeta `Tetris`:
-
-```bash
-python main.py
-```
-
-En Windows PowerShell, el flujo completo sería:
-
-```powershell
-cd C:\Users\uriel
-git clone https://github.com/Uri46/Tetris.git
-cd Tetris
-python -m venv .venv
-.\.venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
@@ -108,30 +74,16 @@ python main.py
 ## Controles
 
 | Acción | Tecla |
-| --- | --- |
-| Mover izquierda/derecha | Flechas izquierda y derecha |
-| Soft Drop | Flecha abajo |
-| Rotar | Flecha arriba |
-| Hard Drop | Espacio |
-| Hold | Shift |
-| Pausa | P |
-| Salir | Esc |
-| Mostrar/ocultar FPS | F |
-
-## Assets reemplazables
-
-El juego funciona aunque las carpetas de assets estén vacías, porque genera un icono y sonidos simples por defecto. Para personalizarlo, agrega archivos con estos nombres:
-
-- Música: `assets/music/theme.ogg`
-- Icono: `assets/images/icon.png`
-- Sonidos: `assets/sounds/move.wav`, `rotate.wav`, `drop.wav`, `clear.wav`, `hold.wav`, `game_over.wav`, `menu.wav`
-
-## Tecnologías utilizadas
-
-- Python 3
-- Pygame CE, compatible con el import clásico `pygame`
-- JSON para persistencia del récord
+| :--- | :--- |
+| Mover izquierda / derecha | Flechas `←` / `→` |
+| Caída suave (*Soft Drop*) | Flecha `↓` |
+| Rotar pieza | Flecha `↑` |
+| Caída instantánea (*Hard Drop*) | `Espacio` |
+| Guardar pieza (*Hold*) | `Shift` |
+| Pausar partida | `P` |
+| Mostrar / ocultar FPS | `F` |
+| Salir / Volver | `Esc` |
 
 ## Licencia
 
-Este proyecto está publicado bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+Publicado bajo licencia MIT (ver archivo `LICENSE`).
